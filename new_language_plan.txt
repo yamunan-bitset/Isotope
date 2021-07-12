@@ -1,14 +1,15 @@
 
 
+
 Isotope (Idiotically Simple Object Type Oriented Programming Elevation)
 
 syntax:
 
 builtin types:
 
-str, int, float, bool, acc, none, list, dict, array, set, tag, rgx, func, class, keval, cmplx
+str, int, float, bool, acc, none, list, dict, array, set, tag, rgx, func, class, keval, cmplx, char
 
-str: formatted"{x} + {y}", normal'\n'
+str: "str"
 int: number
 bool: true or false
 none: none (like null or nil)
@@ -22,6 +23,7 @@ array: <> (depending on how many dimensions, like numpy.array in python)example:
 tag: |something| (see below)
 rgx: /something/ (regex)
 cmplx: num+numi
+char: 'a' (single character)
 
 # comment like this
 
