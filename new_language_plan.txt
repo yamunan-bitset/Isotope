@@ -1,4 +1,5 @@
 
+
 Isotope (Idiotically Simple Object Type Oriented Programming Elevation)
 
 syntax:
@@ -79,7 +80,7 @@ x = $y; means that x is a constant global variable equal to y
 
 indent:
 
-this syntax is still under discussion
+one space per indent level
 
 ~:
 
@@ -185,6 +186,7 @@ match: like match in python, superset of switch
 case
 
 and all boolean operators
+
 
 
 
