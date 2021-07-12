@@ -1,0 +1,196 @@
+
+Isotope (Idiotically Simple Object Type Oriented Programming Elevation)
+
+syntax:
+
+builtin types:
+
+str, int, float, bool, acc, none, list, dict, array, set, tag, rgx, func, class, keval, cmplx
+
+str: formatted"{x} + {y}", normal'\n'
+int: number
+bool: true or false
+none: none (like null or nil)
+float: number.number
+acc: number,number (more accurate representation of float, but takes more memory)
+list: [] add trailing comma to be immutable
+dict: {:} add trailing comma to be immutable
+keval: [:] (like dict, but sorted) add trailing comma to be immutable
+set: {} add trailing comma to be immutable
+array: <> (depending on how many dimensions, like numpy.array in python)example: <<0, 1, 2><0, 1, 2>> 2D array) (add trailing comma to be immutable)
+tag: |something| (see below)
+rgx: /something/ (regex)
+cmplx: num+numi
+
+# comment like this
+
+func:
+def foo(args1, arg2):
+ do_something()
+ if bar:
+  do_something()
+
+class:
+
+class foo(parent)|tags|:
+ def __init__(arg1, arg2=0):
+  self.arg1 = arg1
+  self.arg2 = arg2
+ def method():
+  do_something()
+
+operators:
+
+arithmetic:
++, -, /, //, *, %, **, !
+boolean:
+|, &, !, ^, !|, !&, !^
+binary:
+<<, >>, boolean operators with `(backtick) in front
+equality:
+==, <, >, <=, >=, !=, is (check if a var is following something (see below))
+other:
+? (pointer, gets the memory address), @ (decorator, like in python), ; (follow (see below)), $ (literal (see below)), ~ (only (see below))
+brackets () can always be used to group things
+
+
+following:
+
+x = y; means x will always be equal to the value y has
+x = 1; means that x is a constant equal to 1
+x = array[0][0]; means that x is always equal to that array's [0][0], if it is deleted, x is its last value
+unfollow:
+x = x
+list follow:
+x`;
+
+var = x`;   # var follows what x is following  
+
+
+literal:
+
+def foo(var):
+ global var (means that the variable named var is global)
+ global $var (means that the variable passed into var is global)
+ global $var$ (means that the variable passed into var and the variable named var is global)
+
+x = $y means that x is a global variable equal to y
+x = $y; means that x is a constant global variable equal to y
+
+indent:
+
+this syntax is still under discussion
+
+~:
+
+~ means 'only', like in tags (see below)
+
+tags:
+
+everything can be tagged (like class='foo' in html)
+x = 3|tagname, bar|
+
+def foo(arg1|tagname|)|bar|: (would only accept those tags and has been given tag of bar)
+ do_something()
+in function definitions:
+arg|tag|: accepts everything that has tag
+arg|!tag|: accepts everything except tag
+arg|tag~|: accepts everything that has only that tag or tags
+arg|tag~ or tag2~|: accepts everything that has only tag or only tag2
+
+everything can be given many and different tags
+array = <<<>>>
+array[0][0][0] = 2|origin, array, foo|
+array[1][2][3] = 4|array, bar|
+
+
+changing tags:
+x|| lists all tags
+del x|| delete all tags, but retains the type tag
+x|| = |int, x, foo| sets tags to int, x, foo
+
+all builtin types except none are tags and are given to values its type
+keywords can't be tags
+
+rgx:
+
+like regex in js
+if str~/regex/:
+ do_something()   # true if str matches  
+
+
+example:
+
+class Foo(Bar)|foo, bar, example|:
+ def __init__(arg|int~ or float~ or acc~|, arg2|bool~|)
+  lock self.num = arg   # lock is like private, but you can unlock, the default is unlock  
+  self.cond = arg2
+ def check():
+  if self.cond:
+   return self.num
+  else:
+   return none
+ def __add__(other|int, float|):
+  return self.num + other
+ lock def method():
+  do_something
+
+def func():
+ do_something()
+
+await func()
+
+example = Foo(3, true)|example, foo, tag, some_tag|   # sets tags to these for example, it also has the tags set to the Foo class (you can avoid this by putting a ~ after the tag declaration)  
+print(example.check())   # outputs 3  
+example.method()   # Outputs none and does nothing  
+array = <<1, 2, 3>>   # creates on array <<1, 2, 3>, <>>  
+array[0][1]||   # outputs int  
+array[0][-1]++   # array[0][last one] += 1  
+array[0][2] + example   # outputs 7  
+
+
+
+keywords:
+
+import
+save: convert file to another language, using 'Python' save, also other stuff like using 'JSON' save example_dict
+while
+if
+else
+elif
+class
+def
+true
+false
+none
+in
+is
+global
+try
+catch
+throw
+with
+yield
+await: for calling asynchronous functions, await foo(), any functions can be asynchronous when called like this
+break
+continue
+pass
+lambda
+from
+lock
+unlock
+using: conversions to other languages, using 'JavaScript' import script.js
+as
+match: like match in python, superset of switch
+case
+
+and all boolean operators
+
+
+
+
+
+
+
+
+
