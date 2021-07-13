@@ -1,2 +1,4 @@
 isotope
 lex.yy.c
+isotope.output
+isotope.tab.c
